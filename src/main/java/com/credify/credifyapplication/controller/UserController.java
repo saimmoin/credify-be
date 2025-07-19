@@ -1,4 +1,5 @@
 package com.credify.credifyapplication.controller;
+import com.credify.credifyapplication.dto.UserDTO;
 import com.credify.credifyapplication.model.User;
 import com.credify.credifyapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/email")
+    @GetMapping("/find")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
-        Optional<User> userOpt = userService.getUserByEmail(email);
+        Optional<UserDTO> userOpt = userService.getUserByEmail(email);
         if (userOpt.isPresent()) {
             return ResponseEntity.ok(userOpt.get());
         } else {
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 }
